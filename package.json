@@ -7,7 +7,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "verify": "npm run build && npm run test -- --no-watch"
+    "verify": "npm run build && npm run test -- --no-watch",
+    "preverify": "npm install"
   },
   "private": true,
   "dependencies": {
