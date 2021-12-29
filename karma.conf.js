@@ -18,14 +18,27 @@ module.exports = function (config) {
         // the possible options are listed at https://jasmine.github.io/api/edge/Configuration.html
         // for example, you can disable the random execution with `random: false`
         // or set a specific seed with `seed: 4321`
+        random: false,
       },
       clearContext: false // leave Jasmine Spec Runner output visible in browser
     },
     jasmineHtmlReporter: {
       suppressAll: true // removes the duplicated traces
     },
+    customLaunchers: {
+      headlessChrome: {
+        base: "ChromeHeadless",
+        flags: [
+          "--no-sandbox",
+          "--no-proxy-server",
+          "--disable-web-security",
+          "--disable-gpu",
+          "--js-flags=--max-old-space-size=8196",
+        ],
+      },
+    },
     coverageReporter: {
-      dir: require('path').join(__dirname, './coverage/dn-d-campaign-planner'),
+      dir: require('path').join(__dirname, './coverage/DnDCampaignPlanner'),
       subdir: '.',
       reporters: [
         { type: 'html' },
