@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { database } from '../../app.module';
-import {filter, from, map, Observable, switchMap} from "rxjs";
+// import { database } from '../../app.module';
+import {filter, map, Observable} from "rxjs";
 import {AuthService} from "./auth.service";
-import { ref, getDatabase, goOnline, query } from 'firebase/database';
-import { app } from '../../app.module';
+// import { ref, getDatabase, goOnline, query } from 'firebase/database';
+// import { app } from '../../app.module';
 
 @Injectable({
   providedIn: 'root'
@@ -21,9 +21,9 @@ export class DatabaseService {
           if (!user) {
             throw "User expected"
           }
-          const database = getDatabase(app);
-          goOnline(database);
-          return query(ref(database, `users/${user.uid}/campaigns`)).toJSON();
+          // const database = getDatabase(app);
+          // goOnline(database);
+          // return query(ref(database, `users/${user.uid}/campaigns`)).toJSON();
         })
       );
   }

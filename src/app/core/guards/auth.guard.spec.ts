@@ -1,13 +1,17 @@
-import { TestBed } from '@angular/core/testing';
-
 import { AuthGuard } from './auth.guard';
+import {AuthService} from "../services/auth.service";
+import {Router} from "@angular/router";
+import {autoMockerInstance} from "../../../test-utils/autoMockerPlus";
 
 describe('AuthGuard', () => {
   let guard: AuthGuard;
+  let authServiceMock: AuthService;
+  let routerMock: Router;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
-    guard = TestBed.inject(AuthGuard);
+    authServiceMock = autoMockerInstance.mockClass(AuthService);
+    routerMock = autoMockerInstance.mockClass(Router);
+    guard = new AuthGuard(authServiceMock, routerMock)
   });
 
   it('should be created', () => {
