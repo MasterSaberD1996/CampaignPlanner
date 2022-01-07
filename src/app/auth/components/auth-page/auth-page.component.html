@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="row d-flex justify-content-center">
+    <img src="./assets/Dungeons-and-Dragons-Logo.png" alt="Dungeons and Dragons" height="500">
+    <h1 class="absolute-center">
+      Campaign Planner
+    </h1>
+  </div>
+  <div class="row d-flex align-items-center justify-content-center">
+    <div class="col-4">
+      <div *ngIf="currentMode === AuthMode.SignUp; else SignIn">
+        <app-sign-up></app-sign-up>
+      </div>
+      <ng-template #SignIn>
+      </ng-template>
+    </div>
+  </div>
+</div>

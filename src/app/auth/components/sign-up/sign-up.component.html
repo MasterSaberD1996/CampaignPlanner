@@ -1,0 +1,6 @@
+<form [formGroup]="form" autocomplete="off">
+  <input appAnimatedLabel="Email" type="text" class="form-control" formControlName="email">
+  <input appAnimatedLabel="Password" type="password" class="form-control" formControlName="password">
+  <input appAnimatedLabel="Confirm Password" type="password" class="form-control" formControlName="confirm">
+  <button class="btn btn-success" (click)="sendSignUp()">Sign Up</button>
+</form>

@@ -7,18 +7,20 @@ import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getDatabase } from "firebase/database"
 import { getAuth, browserLocalPersistence, setPersistence } from "firebase/auth";
-import { AuthPageComponent } from './core/components/auth-page/auth-page.component';
 import { HomeComponent } from './core/components/home/home.component';
+import { AnimatedLabelDirective } from './animated-label.directive';
+import {ReactiveFormsModule} from "@angular/forms";
+import {CoreModule} from "./core/core.module";
 
 @NgModule({
   declarations: [
     AppComponent,
-    AuthPageComponent,
-    HomeComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule,
+    CoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]
