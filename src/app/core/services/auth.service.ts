@@ -16,11 +16,20 @@ import FirebaseError = firebase.FirebaseError;
 export class AuthService {
   private userSubject: BehaviorSubject<any | null> = new BehaviorSubject<firebase.User | null>(null);
   public currentUser: Observable<firebase.User | null> = this.userSubject.asObservable();
+  private initSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public init$: Observable<boolean> = this.initSubject.asObservable();
 
   constructor() {
     auth.onAuthStateChanged((user) => {
       this.userSubject.next(user);
+      if (!this.initSubject.value) {
+        this.initSubject.next(true);
+      }
     })
+  }
+
+  public setUserInitialized(isInitialized: boolean): void {
+    this.initSubject.next(isInitialized);
   }
 
   public signInWithEmail(email: string, password: string): Observable<boolean> {
@@ -34,9 +43,17 @@ export class AuthService {
     );
   }
 
-  public signInWithGoogle(): void {
+  public signInWithGoogle(): Observable<boolean> {
     const provider = new GoogleAuthProvider();
-    void signInWithPopup(auth, provider);
+    return from(signInWithPopup(auth, provider))
+      .pipe(
+        map((user) => {
+          return !!user;
+        }),
+        catchError(() => {
+          return of(false);
+        })
+      );
   }
 
   public signUpWithEmail(email: string, password: string): Observable<boolean> {

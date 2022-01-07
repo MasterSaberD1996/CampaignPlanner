@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {AbstractControl, FormControl, FormGroup, ValidationErrors, Validators} from "@angular/forms";
 import {isEqual} from "lodash-es";
 import {AuthService} from "../../../core/services/auth.service";
-import {map, take} from "rxjs";
+import {take} from "rxjs";
 import {Router} from "@angular/router";
+import {routeOnSuccess} from "../../../core/operators/routeOnSuccess";
 
 @Component({
   selector: 'app-sign-up',
@@ -50,11 +51,7 @@ export class SignUpComponent implements OnInit {
     const {email, password} = this.form.value;
     this.authService.signUpWithEmail(email, password)
       .pipe(
-        map((wasSuccessful) => {
-          if (wasSuccessful) {
-            void this.router.navigate([''])
-          }
-        }),
+        routeOnSuccess(this.router, ''),
         take(1)
       ).subscribe();
   }

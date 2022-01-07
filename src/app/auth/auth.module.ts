@@ -6,6 +6,7 @@ import {AuthRoutingModule} from "./auth-routing.module";
 import {CoreModule} from "../core/core.module";
 import {ReactiveFormsModule} from "@angular/forms";
 import { SignInComponent } from './components/sign-in/sign-in.component';
+import {CoolSocialLoginButtonsModule} from "@angular-cool/social-login-buttons";
 
 
 
@@ -16,6 +17,7 @@ import { SignInComponent } from './components/sign-in/sign-in.component';
     AuthRoutingModule,
     CoreModule,
     ReactiveFormsModule,
+    CoolSocialLoginButtonsModule,
   ]
 })
 export class AuthModule { }

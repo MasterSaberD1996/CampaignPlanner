@@ -7,10 +7,9 @@ import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getDatabase } from "firebase/database"
 import { getAuth, browserLocalPersistence, setPersistence } from "firebase/auth";
-import { HomeComponent } from './core/components/home/home.component';
-import { AnimatedLabelDirective } from './animated-label.directive';
 import {ReactiveFormsModule} from "@angular/forms";
 import {CoreModule} from "./core/core.module";
+import {AuthService} from "./core/services/auth.service";
 
 @NgModule({
   declarations: [
@@ -22,11 +21,15 @@ import {CoreModule} from "./core/core.module";
     ReactiveFormsModule,
     CoreModule
   ],
-  providers: [],
+  providers: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
-  constructor() {
+  constructor(authService: AuthService) {
+    if (!localStorage.getItem('firebase:authUser:AIzaSyCIyO6e9Rx3-PfOZUMT-HtldWlEaf6kWKI:[DEFAULT]')) {
+      authService.setUserInitialized(true);
+    }
     void setPersistence(auth, browserLocalPersistence)
   }
 }

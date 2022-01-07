@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../../../core/services/auth.service";
-import {map, take} from "rxjs";
+import {take} from "rxjs";
 import {Router} from "@angular/router";
+import {routeOnSuccess} from "../../../core/operators/routeOnSuccess";
 
 @Component({
   selector: 'app-sign-in',
@@ -32,11 +33,7 @@ export class SignInComponent implements OnInit {
     const {email, password} = this.form.value;
     this.authService.signInWithEmail(email, password)
       .pipe(
-        map((success) => {
-          if (success) {
-            this.router.navigate([''])
-          }
-        }),
+        routeOnSuccess(this.router, ''),
         take(1)
       ).subscribe()
   }
