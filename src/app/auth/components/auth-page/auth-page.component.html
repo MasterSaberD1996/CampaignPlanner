@@ -9,8 +9,11 @@
     <div class="col-4">
       <div *ngIf="currentMode === AuthMode.SignUp; else SignIn">
         <app-sign-up></app-sign-up>
+        <p>Already have an account? <span class="underline-link" (click)="toggleAuthMode()">Click here</span> to log in!</p>
       </div>
       <ng-template #SignIn>
+        <app-sign-in></app-sign-in>
+        <p>Don't have an account? <span class="underline-link" (click)="toggleAuthMode()">Click here</span> to create one!</p>
       </ng-template>
     </div>
   </div>
