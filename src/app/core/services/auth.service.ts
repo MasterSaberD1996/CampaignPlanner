@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../app.module";
-import {BehaviorSubject, Observable} from "rxjs";
+import {BehaviorSubject, from, map, Observable} from "rxjs";
 import firebase from "firebase/compat";
 
 @Injectable({
@@ -26,7 +26,12 @@ export class AuthService {
     void signInWithPopup(auth, provider);
   }
 
-  public signUpWithEmail(email: string, password: string): void {
-    void createUserWithEmailAndPassword(auth, email, password);
+  public signUpWithEmail(email: string, password: string): Observable<boolean> {
+    return from(createUserWithEmailAndPassword(auth, email, password))
+      .pipe(
+        map((user) => {
+          return !!user;
+        })
+      );
   }
 }
