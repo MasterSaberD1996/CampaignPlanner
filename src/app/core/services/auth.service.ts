@@ -1,8 +1,14 @@
-import { Injectable } from '@angular/core';
-import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../app.module";
-import {BehaviorSubject, from, map, Observable} from "rxjs";
+import {Injectable} from '@angular/core';
+import {
+  createUserWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithEmailAndPassword,
+  signInWithPopup
+} from "firebase/auth";
+import {auth} from "../../app.module";
+import {BehaviorSubject, catchError, from, map, Observable, of} from "rxjs";
 import firebase from "firebase/compat";
+import FirebaseError = firebase.FirebaseError;
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +23,15 @@ export class AuthService {
     })
   }
 
-  public signInWithEmail(email: string, password: string): void {
-    void signInWithEmailAndPassword(auth, email, password);
+  public signInWithEmail(email: string, password: string): Observable<boolean> {
+    return from(signInWithEmailAndPassword(auth, email, password)).pipe(
+      map((user) => {
+        return !!user;
+      }),
+      catchError((err: FirebaseError) => {
+        return of(false);
+      })
+    );
   }
 
   public signInWithGoogle(): void {
@@ -31,6 +44,9 @@ export class AuthService {
       .pipe(
         map((user) => {
           return !!user;
+        }),
+        catchError((err: FirebaseError) => {
+          return of(false);
         })
       );
   }
