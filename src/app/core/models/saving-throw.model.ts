@@ -17,6 +17,9 @@ export const savingThrowUtils = {
 }
 
 function updateModifier(savingThrow: ISavingThrow, newMod: number): ISavingThrow {
+  if (newMod % 1 !== 0) {
+    throw "Invalid Modifier"
+  }
   return {
     ...savingThrow,
     modifier: newMod

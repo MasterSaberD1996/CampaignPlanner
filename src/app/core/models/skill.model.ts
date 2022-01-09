@@ -29,6 +29,9 @@ export const skillUtils = {
 };
 
 function updateSkillModifier(skill: ISkill, newMod: number): ISkill {
+  if (newMod % 1 !== 0) {
+    throw "Invalid Modifier"
+  }
   return {
     ...skill,
     modifier: newMod
