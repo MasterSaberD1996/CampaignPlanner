@@ -4,7 +4,8 @@ export interface ISpellSlot {
 }
 
 export enum SpellLevel {
-  one = 1,
+  cantrip,
+  one,
   two,
   three,
   four,
