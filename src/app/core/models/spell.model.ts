@@ -14,13 +14,13 @@ export interface ISpell {
 }
 
 export enum MagicSchool {
-  no,
-  abj,
-  con,
-  div,
-  enc,
-  evo,
-  ill,
-  nec,
-  tra
+  no = "None",
+  abj = "Abjuration",
+  con = "Conjuration",
+  div = "Divination",
+  enc = "Enchantment",
+  evo = "Evocation",
+  ill = "Illusion",
+  nec = "Necromancy",
+  tra = "Transmutation"
 }

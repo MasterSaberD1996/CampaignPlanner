@@ -3,15 +3,7 @@ export interface ISavingThrow {
   readonly modifier: number;
 }
 
-export enum Ability {
-  str = "Strength",
-  dex = "Dexterity",
-  con = "Constitution",
-  int = "Intelligence",
-  wis = "Wisdom",
-  cha = "Charisma"
-}
-
+export type Ability = "Strength" | "Dexterity" | "Constitution" | "Intelligence" | "Wisdom" | "Charisma";
 export const savingThrowUtils = {
   updateModifier
 }
