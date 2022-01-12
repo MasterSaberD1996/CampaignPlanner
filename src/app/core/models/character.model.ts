@@ -23,11 +23,11 @@ export interface ICharacter {
     [key: Ability]: number};
   readonly savingThrows: ReadonlyArray<ISavingThrow>;
   readonly skills: ReadonlyArray<ISkill>;
-  readonly damageVulnerabilities: string;
-  readonly damageResistances: string;
-  readonly damageImmunities: string;
-  readonly conditionImmunities: string;
-  readonly senses: string;
+  readonly damageVulnerabilities?: string;
+  readonly damageResistances?: string;
+  readonly damageImmunities?: string;
+  readonly conditionImmunities?: string;
+  readonly senses?: string;
   readonly passive: number;
   readonly languages: string;
   readonly traits: ReadonlyArray<ITrait>;

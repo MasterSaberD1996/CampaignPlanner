@@ -7,11 +7,13 @@ export interface ISpell {
   readonly isRitual: boolean;
   readonly castingTime: string;
   readonly range: number;
-  readonly components: ['Verbal', 'Somatic', 'Material'];
+  readonly components: ReadonlyArray<SpellComponent>;
   readonly duration: string;
   readonly description: string;
   readonly diceRoles: ReadonlyArray<string>
 }
+
+export type SpellComponent = 'Verbal' | 'Somatic' | 'Material';
 
 export enum MagicSchool {
   no = "None",
