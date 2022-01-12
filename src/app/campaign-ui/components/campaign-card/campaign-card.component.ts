@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {ICampaign} from "../../../core/models/campaign.model";
 
 @Component({
   selector: 'app-campaign-card',
@@ -6,10 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./campaign-card.component.scss']
 })
 export class CampaignCardComponent implements OnInit {
+  // @ts-ignore
+  @Input() public campaign: ICampaign;
 
   constructor() { }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
   }
 
 }
