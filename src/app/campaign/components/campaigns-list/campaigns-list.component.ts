@@ -4,6 +4,7 @@ import {Skill} from "../../../core/models/skill.model";
 import {SpellLevel} from "../../../core/models/spell-slots.model";
 import {MagicSchool} from "../../../core/models/spell.model";
 import {UsageLimitType} from "../../../core/models/trait.model";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-campaigns-list',
@@ -190,9 +191,14 @@ export class CampaignsListComponent implements OnInit {
     encounters: []
   }];
 
-  constructor() { }
+  constructor(
+    private readonly router: Router
+  ) { }
 
   ngOnInit(): void {
   }
 
+  routeToCampaign(campaign: ICampaign) {
+    this.router.navigate(['campaigns', campaign.id])
+  }
 }
