@@ -4,13 +4,15 @@ import { CampaignsListComponent } from './components/campaigns-list/campaigns-li
 import {CampaignRoutingModule} from "./campaign-routing.module";
 import {CampaignUiModule} from "../campaign-ui/campaign-ui.module";
 import { CampaignDetailsComponent } from './components/campaign-details/campaign-details.component';
+import { NewCampaignComponent } from './components/new-campaign/new-campaign.component';
 
 
 
 @NgModule({
   declarations: [
     CampaignsListComponent,
-    CampaignDetailsComponent
+    CampaignDetailsComponent,
+    NewCampaignComponent
   ],
   imports: [
     CommonModule,
