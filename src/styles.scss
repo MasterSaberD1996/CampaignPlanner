@@ -13,14 +13,13 @@
 
     + .animated-label {
       top: 25px;
-
-      &.animated {
-        display: none;
-      }
     }
   }
 }
 
+.h-100p {
+  min-height: 100px !important;
+}
 .animated-label {
   cursor: text;
   white-space: nowrap;
@@ -36,14 +35,18 @@
   }
 }
 
-.is-input, is-select {
+.is-input, is-select, .is-area {
   position: relative;
 }
 
-input {
+input, textarea {
   margin-bottom: 16px;
 }
 
 .clickable {
   cursor: pointer;
+}
+
+h1, h2, h3, h4, h5, h6, h7 {
+  margin-bottom: 16px;
 }

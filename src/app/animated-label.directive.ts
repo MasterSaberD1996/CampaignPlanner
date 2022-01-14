@@ -101,6 +101,10 @@ export class AnimatedLabelDirective implements AfterContentInit, OnDestroy {
     if (this.getElementType(elementRef) === "input") {
       wrapper.classList.add("is-input");
     }
+
+    if (this.getElementType(elementRef) === "textarea") {
+      wrapper.classList.add("is-area");
+    }
   }
 
   private getElementType(elementRef: ElementRef): string {

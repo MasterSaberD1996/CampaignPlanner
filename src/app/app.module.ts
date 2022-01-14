@@ -10,6 +10,8 @@ import { getAuth, browserLocalPersistence, setPersistence } from "firebase/auth"
 import {ReactiveFormsModule} from "@angular/forms";
 import {CoreModule} from "./core/core.module";
 import {AuthService} from "./core/services/auth.service";
+import {environment} from "../environments/environment";
+import {RECAPTCHA_V3_SITE_KEY, RecaptchaV3Module} from "ng-recaptcha";
 
 @NgModule({
   declarations: [
@@ -19,9 +21,14 @@ import {AuthService} from "./core/services/auth.service";
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    CoreModule
+    CoreModule,
+    RecaptchaV3Module
   ],
   providers: [
+    {
+      provide: RECAPTCHA_V3_SITE_KEY,
+      useValue: environment.recaptchaToken
+    }
   ],
   bootstrap: [AppComponent]
 })
@@ -34,18 +41,7 @@ export class AppModule {
   }
 }
 
-const firebaseConfig = {
-  apiKey: "AIzaSyCIyO6e9Rx3-PfOZUMT-HtldWlEaf6kWKI",
-  authDomain: "dnd-campaign-planner.firebaseapp.com",
-  databaseURL: "https://dnd-campaign-planner-default-rtdb.firebaseio.com",
-  projectId: "dnd-campaign-planner",
-  storageBucket: "dnd-campaign-planner.appspot.com",
-  messagingSenderId: "1025639363724",
-  appId: "1:1025639363724:web:fd57aaea4185d03ab7b7a9",
-  measurementId: "G-0PXT9QYS11"
-};
-
-export const app = initializeApp(firebaseConfig);
+export const app = initializeApp(environment.firebaseConfig);
 export const analytics = getAnalytics(app);
 export const database = getDatabase(app);
 export const auth = getAuth(app);

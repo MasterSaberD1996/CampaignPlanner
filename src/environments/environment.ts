@@ -3,7 +3,17 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  recaptchaToken: '6Lf9aQ8eAAAAAA0NsWK4dmmxPIOpuxl-ZAgKz-JN',
+  firebaseConfig: {
+    apiKey: "AIzaSyBUImBT5OGzAr4_9m3dct39wf3Zn4fbVwM",
+    authDomain: "dnd-campaign-planner-3151f.firebaseapp.com",
+    projectId: "dnd-campaign-planner-3151f",
+    storageBucket: "dnd-campaign-planner-3151f.appspot.com",
+    messagingSenderId: "94905517014",
+    appId: "1:94905517014:web:bf298d80bda21f8a281a77",
+    measurementId: "G-DQFTHNL3RB"
+  }
 };
 
 /*
