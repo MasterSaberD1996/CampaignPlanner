@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {ReCaptchaV3Service} from "ng-recaptcha";
 import {DatabaseService} from "../../../core/services/database.service";
-import {switchMap} from "rxjs";
+import {switchMap, take} from "rxjs";
 import {ICampaign} from "../../../core/models/campaign.model";
 import {routeOnSuccess} from "../../../core/operators/routeOnSuccess";
 import {Router} from "@angular/router";
@@ -17,7 +16,6 @@ export class NewCampaignComponent implements OnInit {
   public form: FormGroup;
 
   constructor(
-    private readonly reCaptchaV3Service: ReCaptchaV3Service,
     private readonly databaseService: DatabaseService,
     private readonly router: Router
   ) { }
@@ -35,11 +33,9 @@ export class NewCampaignComponent implements OnInit {
     }
     let id = 0;
     const value = this.form.value;
-    this.reCaptchaV3Service.execute('createCampaign')
+    this.databaseService.loadedData$
       .pipe(
-        switchMap(() => {
-          return this.databaseService.loadedData$
-        }),
+        take(1),
         switchMap((campaigns) => {
           const campaign: ICampaign = {
             name: value.name,

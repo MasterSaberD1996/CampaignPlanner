@@ -4,7 +4,7 @@ import {AuthService} from "../../../core/services/auth.service";
 import {filter, switchMap, take, tap} from "rxjs";
 import {Router} from "@angular/router";
 import {routeOnSuccess} from "../../../core/operators/routeOnSuccess";
-import {ReCaptchaV3Service} from "ng-recaptcha";
+// import {ReCaptchaV3Service} from "ng-recaptcha";
 
 @Component({
   selector: 'app-sign-in',
@@ -18,7 +18,7 @@ export class SignInComponent implements OnInit {
   constructor(
     private readonly authService: AuthService,
     private readonly router: Router,
-    private readonly recaptchaV3Service: ReCaptchaV3Service
+    // private readonly recaptchaV3Service: ReCaptchaV3Service
   ) {
   }
 
@@ -34,13 +34,13 @@ export class SignInComponent implements OnInit {
       return;
     }
     const {email, password} = this.form.value;
-    this.recaptchaV3Service.execute("SignIn")
+    // this.recaptchaV3Service.execute("SignIn")
+          this.authService.signInWithEmail(email, password)
       .pipe(
         tap((token) => console.debug(token)),
         filter((token) => !!token),
-        switchMap(() => {
-          return this.authService.signInWithEmail(email, password)
-        }),
+        // switchMap(() => {
+        // }),
         routeOnSuccess(this.router, ''),
         take(1)
       ).subscribe()

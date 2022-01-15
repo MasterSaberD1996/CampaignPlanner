@@ -11,7 +11,7 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {CoreModule} from "./core/core.module";
 import {AuthService} from "./core/services/auth.service";
 import {environment} from "../environments/environment";
-import {RECAPTCHA_V3_SITE_KEY, RecaptchaV3Module} from "ng-recaptcha";
+import {initializeAppCheck, ReCaptchaV3Provider} from "firebase/app-check";
 
 @NgModule({
   declarations: [
@@ -22,19 +22,14 @@ import {RECAPTCHA_V3_SITE_KEY, RecaptchaV3Module} from "ng-recaptcha";
     AppRoutingModule,
     ReactiveFormsModule,
     CoreModule,
-    RecaptchaV3Module
   ],
   providers: [
-    {
-      provide: RECAPTCHA_V3_SITE_KEY,
-      useValue: environment.recaptchaToken
-    }
   ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
   constructor(authService: AuthService) {
-    if (!localStorage.getItem('firebase:authUser:AIzaSyCIyO6e9Rx3-PfOZUMT-HtldWlEaf6kWKI:[DEFAULT]')) {
+    if (!localStorage.getItem(`firebase:authUser:${environment.firebaseConfig.apiKey}:[DEFAULT]`)) {
       authService.setUserInitialized(true);
     }
     void setPersistence(auth, browserLocalPersistence)
@@ -45,3 +40,7 @@ export const app = initializeApp(environment.firebaseConfig);
 export const analytics = getAnalytics(app);
 export const database = getDatabase(app);
 export const auth = getAuth(app);
+export const appCheck = initializeAppCheck(app, {
+  provider: new ReCaptchaV3Provider(environment.recaptchaToken),
+  isTokenAutoRefreshEnabled: true
+})

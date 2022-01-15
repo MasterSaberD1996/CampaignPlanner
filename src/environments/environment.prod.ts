@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  recaptchaToken: '6LcKWg8eAAAAAGz9XVuOnyxN_nG8O6Q5KzolvmRg',
+  recaptchaToken: '6LfEFhMeAAAAANu7thM9rDiXfYdl17IRtJihbPeR',
   firebaseConfig: {
     apiKey: "AIzaSyBUImBT5OGzAr4_9m3dct39wf3Zn4fbVwM",
     authDomain: "dnd-campaign-planner-3151f.firebaseapp.com",
