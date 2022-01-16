@@ -35,7 +35,7 @@ export class AppModule {
     void setPersistence(auth, browserLocalPersistence)
   }
 }
-
+// quick reset
 export const app = initializeApp(environment.firebaseConfig);
 export const analytics = getAnalytics(app);
 export const database = getDatabase(app);
