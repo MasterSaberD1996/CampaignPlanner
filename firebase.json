@@ -3,7 +3,7 @@
     "rules": "database.rules.json"
   },
   "hosting": {
-    "public": "dist/CampaignPlanner",
+    "public": "dist/dn-d-campaign-planner",
     "ignore": [
       "firebase.json",
       "**/.*",
