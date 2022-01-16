@@ -1,30 +1,57 @@
 import { Injectable } from '@angular/core';
-// import { database } from '../../app.module';
-import {filter, map, Observable} from "rxjs";
+import {BehaviorSubject, filter, from, map, Observable, of, switchMap} from "rxjs";
 import {AuthService} from "./auth.service";
-// import { ref, getDatabase, goOnline, query } from 'firebase/database';
-// import { app } from '../../app.module';
+import {ICampaign} from "../models/campaign.model";
+import {getDatabase, goOnline, ref, get, onValue, push, set} from "firebase/database";
+import {app} from "../../app.module";
 
 @Injectable({
   providedIn: 'root'
 })
 export class DatabaseService {
-  public loadedData$: Observable<any>;
+  private loadedCampaigns: BehaviorSubject<ICampaign[]> = new BehaviorSubject<ICampaign[]>([])
+  public loadedData$: Observable<ICampaign[]> = this.loadedCampaigns.asObservable();
+  private readonly db = getDatabase(app);
 
   constructor(
     private readonly authService: AuthService
   ) {
-    this.loadedData$ = this.authService.currentUser
+    this.authService.currentUser
       .pipe(
         filter((user) => !!user),
         map((user) => {
           if (!user) {
-            throw "User expected"
+            throw "user expected"
           }
-          // const database = getDatabase(app);
-          // goOnline(database);
-          // return query(ref(database, `users/${user.uid}/campaigns`)).toJSON();
+          const queryRef = ref(this.db, `users/${user.uid}/campaigns`)
+          onValue(queryRef, (snapshot) => {
+            const campaigns: ICampaign[] = [];
+            snapshot.forEach((childSnapshot) => {
+              const campaign = childSnapshot.val() as ICampaign;
+              campaigns.push(campaign)
+            });
+            this.loadedCampaigns.next(campaigns);
+          });
+        }),
+      ).subscribe();
+  }
+
+  public saveCampaign(campaign: ICampaign): Observable<boolean> {
+    return this.authService.currentUser
+      .pipe(
+        switchMap((user) => {
+          if (!user) {
+            throw "expected user not to be null"
+          }
+          const campaignsRef = ref(this.db, `users/${user.uid}/campaigns`);
+          const newCampaignRef = push(campaignsRef);
+          return from(set(newCampaignRef, campaign).then(() => {
+            return true;
+          }).catch((err) => {
+            console.error(err);
+            return false;
+          }))
         })
-      );
+      )
   }
 }

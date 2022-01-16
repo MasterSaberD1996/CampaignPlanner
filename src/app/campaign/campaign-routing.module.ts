@@ -19,7 +19,6 @@ const routes: Routes = [
     component: CampaignDetailsComponent
   }
 ];
-
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]

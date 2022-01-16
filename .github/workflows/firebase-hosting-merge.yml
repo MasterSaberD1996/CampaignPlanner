@@ -15,6 +15,6 @@ jobs:
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_DND_CAMPAIGN_PLANNER }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_DND_CAMPAIGN_PLANNER_3151F }}'
           channelId: live
-          projectId: dnd-campaign-planner
+          projectId: dnd-campaign-planner-3151f

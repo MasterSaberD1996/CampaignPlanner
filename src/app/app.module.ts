@@ -10,6 +10,8 @@ import { getAuth, browserLocalPersistence, setPersistence } from "firebase/auth"
 import {ReactiveFormsModule} from "@angular/forms";
 import {CoreModule} from "./core/core.module";
 import {AuthService} from "./core/services/auth.service";
+import {environment} from "../environments/environment";
+import {initializeAppCheck, ReCaptchaV3Provider} from "firebase/app-check";
 
 @NgModule({
   declarations: [
@@ -19,7 +21,7 @@ import {AuthService} from "./core/services/auth.service";
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    CoreModule
+    CoreModule,
   ],
   providers: [
   ],
@@ -27,25 +29,18 @@ import {AuthService} from "./core/services/auth.service";
 })
 export class AppModule {
   constructor(authService: AuthService) {
-    if (!localStorage.getItem('firebase:authUser:AIzaSyCIyO6e9Rx3-PfOZUMT-HtldWlEaf6kWKI:[DEFAULT]')) {
+    if (!localStorage.getItem(`firebase:authUser:${environment.firebaseConfig.apiKey}:[DEFAULT]`)) {
       authService.setUserInitialized(true);
     }
     void setPersistence(auth, browserLocalPersistence)
   }
 }
-
-const firebaseConfig = {
-  apiKey: "AIzaSyCIyO6e9Rx3-PfOZUMT-HtldWlEaf6kWKI",
-  authDomain: "dnd-campaign-planner.firebaseapp.com",
-  databaseURL: "https://dnd-campaign-planner-default-rtdb.firebaseio.com",
-  projectId: "dnd-campaign-planner",
-  storageBucket: "dnd-campaign-planner.appspot.com",
-  messagingSenderId: "1025639363724",
-  appId: "1:1025639363724:web:fd57aaea4185d03ab7b7a9",
-  measurementId: "G-0PXT9QYS11"
-};
-
-export const app = initializeApp(firebaseConfig);
+// quick reset
+export const app = initializeApp(environment.firebaseConfig);
 export const analytics = getAnalytics(app);
 export const database = getDatabase(app);
 export const auth = getAuth(app);
+export const appCheck = initializeAppCheck(app, {
+  provider: new ReCaptchaV3Provider(environment.recaptchaToken),
+  isTokenAutoRefreshEnabled: true
+})

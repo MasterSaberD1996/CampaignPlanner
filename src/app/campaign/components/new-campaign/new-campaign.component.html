@@ -1,1 +1,16 @@
-<p>new-campaign works!</p>
+<div class="container">
+  <div class="d-flex align-items-center flex-column">
+    <h1>New Campaign</h1>
+    <div class="row w-100">
+      <div class="col-12">
+        <p>Enter the name of the campaign and a description if you would like. You will have an opportunity to add characters on the next page.</p>
+        <form [formGroup]="form">
+          <input class="form-control" type="text" appAnimatedLabel="Campaign name" formControlName="name">
+          <textarea appAnimatedLabel="Description (optional)" formControlName="description"
+                    class="form-control h-100p"></textarea>
+          <button class="btn btn-success" (click)="createCampaign()">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

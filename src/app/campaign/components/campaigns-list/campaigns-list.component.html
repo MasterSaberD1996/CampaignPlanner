@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="campaigns$ | async as campaigns">
   <h1 class="d-flex justify-content-center">My Campaigns</h1>
   <div class="d-flex justify-content-end">
     <button class="btn btn-success" (click)="routeToCreateCampaign()">Create Campaign</button>

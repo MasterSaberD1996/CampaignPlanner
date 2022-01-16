@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AbstractControl, FormControl, FormGroup, ValidationErrors, Validators} from "@angular/forms";
 import {isEqual} from "lodash-es";
 import {AuthService} from "../../../core/services/auth.service";
-import {take} from "rxjs";
+import {filter, map, switchMap, take} from "rxjs";
 import {Router} from "@angular/router";
 import {routeOnSuccess} from "../../../core/operators/routeOnSuccess";
+// import {ReCaptchaV3Service} from "ng-recaptcha";
 
 @Component({
   selector: 'app-sign-up',
@@ -14,14 +15,17 @@ import {routeOnSuccess} from "../../../core/operators/routeOnSuccess";
 export class SignUpComponent implements OnInit {
   // @ts-ignore
   public form: FormGroup;
+
   private get passwordControl(): FormControl {
     return this.form.get('password') as FormControl;
   }
 
   constructor(
     private readonly authService: AuthService,
-    private readonly router: Router
-  ) { }
+    private readonly router: Router,
+    // private readonly recaptchaV3Service: ReCaptchaV3Service
+  ) {
+  }
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -41,7 +45,7 @@ export class SignUpComponent implements OnInit {
       return null;
     }
 
-    return isEqual(passwordValue, confirmValue) ? null : { notEqual: true }
+    return isEqual(passwordValue, confirmValue) ? null : {notEqual: true}
   }
 
   public sendSignUp(): void {
@@ -49,8 +53,12 @@ export class SignUpComponent implements OnInit {
       return;
     }
     const {email, password} = this.form.value;
-    this.authService.signUpWithEmail(email, password)
+
+    // this.recaptchaV3Service.execute('SignUp')
+          this.authService.signUpWithEmail(email, password)
       .pipe(
+        // switchMap(() => {
+        // }),
         routeOnSuccess(this.router, ''),
         take(1)
       ).subscribe();
