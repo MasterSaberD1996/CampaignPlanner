@@ -7,6 +7,7 @@ import { CampaignDetailsComponent } from './components/campaign-details/campaign
 import { NewCampaignComponent } from './components/new-campaign/new-campaign.component';
 import {CoreModule} from "../core/core.module";
 import {ReactiveFormsModule} from "@angular/forms";
+import {CampaignNavigationComponent} from "./components/campaign-navigation/campaign-navigation.component";
 
 
 
@@ -14,7 +15,8 @@ import {ReactiveFormsModule} from "@angular/forms";
   declarations: [
     CampaignsListComponent,
     CampaignDetailsComponent,
-    NewCampaignComponent
+    NewCampaignComponent,
+    CampaignNavigationComponent
   ],
     imports: [
         CommonModule,

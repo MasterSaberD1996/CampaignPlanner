@@ -14,18 +14,17 @@ import {environment} from "../environments/environment";
 import {initializeAppCheck, ReCaptchaV3Provider} from "firebase/app-check";
 
 @NgModule({
-  declarations: [
-    AppComponent,
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    ReactiveFormsModule,
-    CoreModule,
-  ],
-  providers: [
-  ],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        ReactiveFormsModule,
+        CoreModule,
+    ],
+    providers: [],
+    bootstrap: [AppComponent]
 })
 export class AppModule {
   constructor(authService: AuthService) {

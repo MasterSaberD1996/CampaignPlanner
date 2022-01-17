@@ -3,7 +3,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {DatabaseService} from "../../../core/services/database.service";
 import {switchMap, take} from "rxjs";
 import {ICampaign} from "../../../core/models/campaign.model";
-import {routeOnSuccess} from "../../../core/operators/routeOnSuccess";
+import {routeToCampaignOnSuccess} from "../../../core/operators/routeOnSuccess";
 import {Router} from "@angular/router";
 
 @Component({
@@ -50,7 +50,7 @@ export class NewCampaignComponent implements OnInit {
           id = campaigns.length + 1
           return this.databaseService.saveCampaign(campaign)
         }),
-        routeOnSuccess(this.router, 'campaigns', id.toString())
+        routeToCampaignOnSuccess(this.router)
       ).subscribe();
   }
 }

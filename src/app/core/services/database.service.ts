@@ -36,7 +36,7 @@ export class DatabaseService {
       ).subscribe();
   }
 
-  public saveCampaign(campaign: ICampaign): Observable<boolean> {
+  public saveCampaign(campaign: ICampaign): Observable<ICampaign> {
     return this.authService.currentUser
       .pipe(
         switchMap((user) => {
@@ -51,6 +51,16 @@ export class DatabaseService {
             console.error(err);
             return false;
           }))
+        }),
+        switchMap((success) => {
+          if (success) {
+            return this.loadedData$.pipe(
+              map((campaigns) => {
+                return campaigns[campaigns.length - 1];
+              })
+            )
+          }
+          throw "failed to create campaign";
         })
       )
   }
