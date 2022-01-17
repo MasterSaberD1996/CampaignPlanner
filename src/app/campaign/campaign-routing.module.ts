@@ -16,7 +16,8 @@ const routes: Routes = [
   },
   {
     path: ':id',
-    component: CampaignDetailsComponent
+    component: CampaignDetailsComponent,
+    children: []
   }
 ];
 @NgModule({

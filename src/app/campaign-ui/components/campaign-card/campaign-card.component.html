@@ -1,5 +1,5 @@
 <div *ngIf="campaign" class="border-rounded">
   <h3>{{campaign.name}}</h3>
-  <p *ngIf="campaign.adventures.length">Adventures: {{campaign.adventures.length}}</p>
-  <p *ngIf="campaign.encounters.length">Adventures: {{campaign.encounters.length}}</p>
+  <p *ngIf="campaign?.adventures?.length">Adventures: {{campaign?.adventures?.length}}</p>
+  <p *ngIf="campaign?.encounters?.length">Adventures: {{campaign?.encounters?.length}}</p>
 </div>
